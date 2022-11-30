@@ -31,7 +31,7 @@ const ProfileScreen = (props) => {
         if (Platform.OS !== "web") {
             const {
                 status,
-            } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            } = await ImagePicker.requestCameraPermissionsAsync();
             if (status !== "granted") {
                 alert("Sorry, we need camera permissions to make this work!");
             }
@@ -74,8 +74,8 @@ const ProfileScreen = (props) => {
             console.log("handleImagePicked function started")
             setUploading(true);
 
-            if (!pickerResult.cancelled) {
-                const uploadUrl = await uploadImageAsync(pickerResult.uri);
+            if (!pickerResult.canceled) {
+                const uploadUrl = await uploadImageAsync(pickerResult.assets[0].uri);
                 setImage(uploadUrl);
                 updateImage(uploadUrl);
                 console.log("The Upload URL is " + uploadUrl);
