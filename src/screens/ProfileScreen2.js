@@ -14,12 +14,12 @@ const db = getDatabase();
 const ProfileScreen = (props) => {
 
     const [currentUser, setCurrentUser] = useState(props.currentUser);
-    const [uploading, setUploading] = useState(false);
+    const [uploading, setUploading]     = useState(false);
     const [displayName, setDisplayName] = useState("");
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [photoURL, setPhotoURL] = useState("");
+    const [username, setUsername]       = useState("");
+    const [email, setEmail]             = useState("");
+    const [password, setPassword]       = useState("");
+    const [photoURL, setPhotoURL]       = useState("");
 
     const setUser = () => {
         onValue(refd(db, 'users/' + auth.currentUser.uid), (snapshot) => {
