@@ -1,33 +1,33 @@
-import { useNavigation } from "@react-navigation/core";
-import { auth } from "../../firebase";
-import { TouchableOpacity, Text, StyleSheet, Alert } from 'react-native';
+import { useNavigation } from "@react-navigation/core"
+import { auth } from "../../firebase"
+import { TouchableOpacity, Text, StyleSheet, Alert } from 'react-native'
 
 
 const LogoutButton = () => {
 
-    const navigation = useNavigation();
+    const navigation = useNavigation()
 
     const handleSignOut = () => {
         auth
             .signOut()
             .then(() => {
-                navigation.replace("Login");
+                navigation.replace("Login")
             })
             .catch((err) => {
                 Alert.alert('Error', err.code, [
                     { text: 'OK', onPress: () => console.log('OK Pressed') },
-                ]);
-            });
-    };
+                ])
+            })
+    }
 
     return (
         <TouchableOpacity style={styles.button} onPress={handleSignOut}>
             <Text style={styles.buttonText}>Logout</Text>
         </TouchableOpacity>
-    );
+    )
 }
 
-export default LogoutButton;
+export default LogoutButton
 
 const styles = StyleSheet.create({
     container: {
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         fontSize: 16,
     },
-});
+})

@@ -1,11 +1,11 @@
 {
   "expo": {
     "name": "Slapp",
-    "slug": "slapp",
+    "slug": "Smart Trading Signals",
     "version": "0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

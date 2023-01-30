@@ -1,8 +1,10 @@
 // Import the functions you need from the SDKs you need
-import * as firebase from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getDatabase, ref, onValue, set } from "firebase/database";
-import { getAnalytics, isSupported } from "firebase/analytics";
+import * as firebase from "firebase/app"
+import { getAuth, updateProfile, onAuthStateChanged } from "firebase/auth"
+import {  } from "firebase/auth"
+import { getDatabase, ref as refd, onValue, set } from "firebase/database"
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { getAnalytics, isSupported } from "firebase/analytics"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,19 +18,23 @@ const firebaseConfig = {
     messagingSenderId: "846438362597",
     appId: "1:846438362597:web:dcfa0422887367e7e3530c",
     measurementId: "G-BWWYWL3S7D"
-};
+}
 
 // Initialize Firebase
 if (firebase.getApps.length === 0) {
-    app = firebase.initializeApp(firebaseConfig);
+    app = firebase.initializeApp(firebaseConfig)
 } else {
-    app = firebase.getApp();
+    app = firebase.getApp()
 }
+
+// Initialize Firebase Analytics
 isSupported().then((result) => {
     if (result) {
-        const analytics = getAnalytics(app);
+        const analytics = getAnalytics(app)
     }
 })
 
-const auth = getAuth();
-export { auth, getDatabase, ref, onValue, set };
+const auth = getAuth()
+const db = getDatabase()
+
+export { auth, db, updateProfile, onAuthStateChanged, getDatabase, refd, onValue, set, getStorage, ref, uploadBytes, getDownloadURL }

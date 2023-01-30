@@ -7,7 +7,7 @@ const Separator = () => {
   )
 }
 
-export default Separator;
+export default Separator
 const styles = StyleSheet.create({
   itemSeparator: {
     flex: 1,
