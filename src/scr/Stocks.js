@@ -14,7 +14,6 @@ const Stocks = (props) => {
         onValue(refd(db, 'stocks/'), (snapshot) => {
             setStocks(snapshot.val())
         })
-        // console.log(stocks)
     }
 
     useEffect(() => {
@@ -26,11 +25,6 @@ const Stocks = (props) => {
             <Text style={[styles.title, textColor]}>{item.title}</Text>
         </TouchableOpacity>
     )
-    
-    // const handleSingleStock = () => {
-    //     const navigation = useNavigation()
-    //     navigation.replace("SingleStock")
-    // }
 
     const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? "#6e3b6e" : themeBackground
