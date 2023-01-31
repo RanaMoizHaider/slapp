@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { FlatList, SafeAreaView, StatusBar, Text, TouchableOpacity } from "react-native"
+import { FlatList, SafeAreaView, StatusBar, Text, TouchableOpacity, TextInput, View } from "react-native"
 import { useNavigation } from "@react-navigation/core"
 import { styles, themeBackground } from "../components/Style"
 import { db, refd, onValue } from "../../firebase"
@@ -8,6 +8,8 @@ const Stocks = (props) => {
     const navigation = useNavigation()
     const [selectedId, setSelectedId] = useState(null)
     const [stocks, setStocks] = useState([])
+    const [filteredStocks, setFilteredStocks] = useState([])
+    const [search, setSearch] = useState("")
     const [isLoading, setIsLoading] = useState(true)
 
     const setStocksData = async () => {
@@ -19,6 +21,12 @@ const Stocks = (props) => {
     useEffect(() => {
         setStocksData()
     }, [])
+
+    useEffect(() => {
+        setFilteredStocks(
+            stocks.filter(item => item.title.toLowerCase().includes(search.toLowerCase()))
+        );
+    }, [search]);
     
     const Item = ({ item, onPress, backgroundColor, textColor }) => (
         <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
@@ -35,8 +43,7 @@ const Stocks = (props) => {
                 item={item}
                 // onPress={() => setSelectedId(item.id)}
                 onPress={() => {
-                    // setSelectedId(item.id)
-                    index = stocks.findIndex((i) => i.id === item.id);
+                    let index = stocks.findIndex((i) => i.id === item.id);
                     navigation.navigate('SingleStock', { stockIndex: index, title: item.title, ticker: item.ticker })
                 }}
                 backgroundColor={{ backgroundColor }}
@@ -47,8 +54,17 @@ const Stocks = (props) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.searchBar}>
+                <TextInput
+                    style={styles.searchInput}
+                    placeholder="Search for stocks..."
+                    placeholderTextColor="#0782F9"
+                    value={search}
+                    onChangeText={text => setSearch(text)}
+                />
+            </View>
             <FlatList
-                data={stocks}
+                data={filteredStocks}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
                 extraData={selectedId}

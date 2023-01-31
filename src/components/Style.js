@@ -309,7 +309,24 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         paddingHorizontal: 30,
         paddingTop: 30,
-    }
+    },
+    searchBar: {
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: 'white',
+        marginVertical: 10,
+        color: themeBackground,
+        marginHorizontal: 16,
+        borderRadius: 10,
+
+    },
+    searchInput: {
+        padding: 10,
+        color: themeBackground,
+        fontSize: 16,
+        flex: 1,
+    },
+    
 })
 
 export { styles, themeBackground }
