@@ -20,14 +20,19 @@ const StocksStack = createNativeStackNavigator()
 function StocksStackScreen() {
   return (
     <StocksStack.Navigator>
-      <StocksStack.Screen
-        name="Stocks"
-        component={Stocks}
-        options={() => ({
-            title: 'Stocks',
-        })}
-      />
-      <StocksStack.Screen name="SingleStock" component={SingleStockScr} />
+        <StocksStack.Screen
+            name="Stocks"
+            component={Stocks}
+            options={() => ({
+                title: 'Stocks',
+            })}
+        />
+        <StocksStack.Screen name="SingleStock" component={SingleStockScr} />
+        {/* <StocksStack.Group screenOptions={{ presentation: 'modal' }}>
+            <StocksStack.Screen name="Login" component={LoginScr} />
+            <StocksStack.Screen name="Register" component={RegisterScr} />
+            <StocksStack.Screen name="ForgetPass" component={ForgetPassScr} />
+        </StocksStack.Group> */}
     </StocksStack.Navigator>
   )
 }
@@ -39,6 +44,7 @@ function FavoritesStackScreen() {
         <FavoritesStack.Navigator>
             <FavoritesStack.Group>
                 <FavoritesStack.Screen name="Favorites" component={FavoritesScr} />
+                <FavoritesStack.Screen name="SingleStock" component={SingleStockScr} />
                 <FavoritesStack.Screen name="Details" component={DetailsScr} />
             </FavoritesStack.Group>
             <FavoritesStack.Group screenOptions={{ presentation: 'modal' }}>

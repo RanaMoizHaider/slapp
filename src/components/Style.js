@@ -315,16 +315,15 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: 'white',
         marginVertical: 10,
-        color: "#0782F9",
         marginHorizontal: 16,
         borderRadius: 10,
 
     },
     searchInput: {
         padding: 10,
-        color: "#0782F9",
         fontSize: 16,
         flex: 1,
+        zIndex: 99999
     },
     
 })

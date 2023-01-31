@@ -15,6 +15,7 @@ const Stocks = (props) => {
     const setStocksData = async () => {
         onValue(refd(db, 'stocks/'), (snapshot) => {
             setStocks(snapshot.val())
+            setFilteredStocks(snapshot.val())
         })
     }
 
@@ -58,8 +59,6 @@ const Stocks = (props) => {
                 <TextInput
                     style={styles.searchInput}
                     placeholder="Search for stocks..."
-                    placeholderTextColor="#0782F9"
-                    textColor="#0782F9"
                     value={search}
                     onChangeText={text => setSearch(text)}
                 />

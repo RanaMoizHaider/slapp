@@ -35,8 +35,11 @@ function SingleStockScr({ route }) {
         onValue(refd(db, 'stocks/' + route.params.stockIndex), (snapshot) => {
             setSingleStock(snapshot.val())
         })
+    }
+
+    const setFav = async () => {
         if (currentUser) {
-            onValue(refd(db, `users/${currentUser.uid}/favorites/${route.params.stockIndex}`), (snapshot) => {
+            onValue(refd(db, `users/${currentUser.uid}/favorites/${singleStock?.ticker}`), (snapshot) => {
                 setIsInFavorites(snapshot.exists())
             })
         }
@@ -49,13 +52,17 @@ function SingleStockScr({ route }) {
         })
     }, [])
 
+    useEffect(() => {
+        setFav()
+    }, [singleStock])
+
     const toggleFavorite = () => {
         if (currentUser) {
             if (isInFavorites) {
-                removeFromFavorites(currentUser.uid, route.params.stockIndex)
+                removeFromFavorites(currentUser.uid, singleStock?.ticker)
                 setIsInFavorites(false)
             } else {
-                addToFavorites(currentUser.uid, route.params.stockIndex, singleStock)
+                addToFavorites(currentUser.uid, singleStock?.ticker)
                 setIsInFavorites(true)
             }
         }
@@ -71,7 +78,11 @@ function SingleStockScr({ route }) {
                 { singleStock?.target ? <Upward /> : <Downward /> }
             </View>
             <View style={{ marginTop: 20, width: '100%', alignItems: 'center' }}>
+            {currentUser ? 
                 <Button title={isInFavorites ? "Remove from favorites" : "Add to favorites"} onPress={toggleFavorite} />
+                :
+                <Button title="Login to add it to favorites" onPress={() => navigation.navigate('Login')} />
+            }
             </View>
         </View>
     )
