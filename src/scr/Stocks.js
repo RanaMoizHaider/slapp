@@ -59,6 +59,7 @@ const Stocks = (props) => {
                     style={styles.searchInput}
                     placeholder="Search for stocks..."
                     placeholderTextColor="#0782F9"
+                    textColor="#0782F9"
                     value={search}
                     onChangeText={text => setSearch(text)}
                 />

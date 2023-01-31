@@ -37,4 +37,12 @@ isSupported().then((result) => {
 const auth = getAuth()
 const db = getDatabase()
 
-export { auth, db, updateProfile, onAuthStateChanged, getDatabase, refd, onValue, set, getStorage, ref, uploadBytes, getDownloadURL }
+const addToFavorites = (userId, stockId) => {
+    set(refd(db, "users/" + userId + "/favorites/" + stockId), true);
+};
+
+const removeFromFavorites = (userId, stockId) => {
+    set(refd(db, "users/" + userId + "/favorites/" + stockId), null);
+};
+
+export { auth, db, updateProfile, onAuthStateChanged, getDatabase, refd, onValue, set, getStorage, ref, uploadBytes, getDownloadURL, addToFavorites, removeFromFavorites }
