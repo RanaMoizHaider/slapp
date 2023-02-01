@@ -124,12 +124,17 @@ const styles = StyleSheet.create({
         marginLeft: "3%",
         marginRight: "3%",
     },
+    loginInputContainer: {
+        width: "80%",
+        justifyContent: "center",
+    },
     input: {
         backgroundColor: "white",
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderRadius: 8,
         marginTop: 5,
+        fontSize: 18
     },
 
     detailsWrapper: {
@@ -307,23 +312,26 @@ const styles = StyleSheet.create({
     ssContainer: {
         flex: 1,
         flexDirection: 'column',
-        paddingHorizontal: 30,
+        // paddingHorizontal: 30,
         paddingTop: 30,
     },
     searchBar: {
         padding: 10,
         borderRadius: 10,
         backgroundColor: 'white',
+        color: 'black',
         marginVertical: 10,
         marginHorizontal: 16,
         borderRadius: 10,
 
     },
     searchInput: {
-        padding: 10,
+        padding: 5,
+        height: 30,
         fontSize: 16,
-        flex: 1,
-        zIndex: 99999
+    },
+    forgotLabel: {
+        alignItems: 'flex-end'
     },
     
 })

@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "Slapp",
-    "slug": "Smart Trading Signals",
-    "version": "0.1",
+    "slug": "slapp",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -18,7 +18,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ranamoizhaider.slapp",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {

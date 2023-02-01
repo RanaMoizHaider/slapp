@@ -176,13 +176,13 @@ const ShowProfile = (props) => {
                 </TouchableOpacity>
             </View>
             {/* Username heading after picture */}
-            <View style={styles.headerWrapper}>
+            {/* <View style={styles.headerWrapper}>
                 <Text style={styles.headerText}>@{currentUser?.username}</Text>
-            </View>
+            </View> */}
 
             {/* <Seperator /> */}
 
-            <View style={styles.inputContainer}>
+            <View style={[styles.inputContainer]}>
                 <Text style={styles.detailText1}>Name</Text>
                 <TextInput
                     placeholder="Name"
@@ -203,8 +203,6 @@ const ShowProfile = (props) => {
                     <Text style={styles.buttonText}>Update Profile</Text>
                 </TouchableOpacity> */}
             </View>
-
-            <View style={styles.line} />
 
             <View style={styles.inputContainer}>
                 {/* <Text style={styles.detailText1}>Old Password</Text>

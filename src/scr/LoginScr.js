@@ -1,5 +1,6 @@
 import {
     Alert,
+    Button,
     KeyboardAvoidingView,
     Platform,
     Text,
@@ -9,7 +10,6 @@ import {
 } from "react-native"
 import React, { useState, useEffect } from "react"
 import {
-    createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     onAuthStateChanged,
 } from "firebase/auth"
@@ -36,6 +36,10 @@ const LoginScr = () => {
         navigation.replace("Register")
     }
 
+    const handleForget = () => {
+        navigation.replace("ForgetPass")
+    }
+
     const handleLogIn = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredentials) => {
@@ -51,7 +55,7 @@ const LoginScr = () => {
 
     return (
         <KeyboardAvoidingView style={styles.centerContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <View style={styles.inputContainer}>
+            <View style={styles.loginInputContainer}>
                 <TextInput
                     placeholder="Email"
                     value={email}
@@ -65,6 +69,10 @@ const LoginScr = () => {
                     style={styles.input}
                     secureTextEntry
                 />
+            </View>
+
+            <View style={{alignItems: 'flex-end'}}>
+                <Button title="Forgor Password?" onPress={handleForget} />
             </View>
 
             <View style={styles.buttonContainer}>

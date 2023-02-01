@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/core"
 import { auth, db, refd, onValue, addToFavorites, removeFromFavorites } from "../../firebase"
 import { styles, themeBackground } from "../components/Style"
 import { Ionicons } from '@expo/vector-icons'
+import { LineChart } from 'react-native-chart-kit'
 
 const Upward = () => {
     return (
@@ -67,12 +68,44 @@ function SingleStockScr({ route }) {
             }
         }
     }
+    const line = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        datasets: [
+            {
+                data: [20, 45, 28, 80, 99, 43],
+                strokeWidth: 2,
+            },
+        ],
+    };
 
     return (
         <View style={styles.ssContainer}>
-            <Text style={{ fontSize: 40, fontWeight: "bold" }}>{singleStock?.ticker}</Text>
-            <Text style={{ fontSize: 20 }}>{singleStock?.title}</Text>
-            <View style={styles.line} />
+            <View style={{paddingHorizontal: 20}}>
+                <Text style={{ fontSize: 40, fontWeight: "bold" }}>{singleStock?.ticker}</Text>
+                <Text style={{ fontSize: 20 }}>{singleStock?.title}</Text>
+                <View style={styles.line} />
+            </View>
+            <LineChart
+                data={line}
+                width={screenWidth} // from react-native
+                height={220}
+                yAxisLabel={'$'}
+                chartConfig={{
+                    backgroundColor: themeBackground,
+                    backgroundGradientFrom: themeBackground,
+                    backgroundGradientTo: themeBackground,
+                    decimalPlaces: 2,
+                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                    style: {
+                        borderRadius: 10
+                    }
+                }}
+                bezier
+                style={{
+                marginVertical: 8,
+                borderRadius: 16
+                }}
+            />
             <View style={styles.centerContainer}>
                 <Text style={{ fontSize: 20 }}>The expected price of {singleStock?.ticker} will go</Text>
                 { singleStock?.target ? <Upward /> : <Downward /> }

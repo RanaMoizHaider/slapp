@@ -89,7 +89,7 @@ const ShowFavorites = (props) => {
                 />
             </View>
             <FlatList
-                data={filteredFavorites}
+                data={favorites}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
                 extraData={selectedId}

@@ -12,11 +12,12 @@ import React, { useState, useEffect } from "react"
 import {
     createUserWithEmailAndPassword,
     onAuthStateChanged,
-    updateProfile
+    updateProfile,
+    sendEmailVerification
 } from "firebase/auth"
 import { useNavigation } from "@react-navigation/core"
 import { styles } from '../components/Style'
-import { auth, getDatabase, ref, set } from "../../firebase"
+import { auth, getDatabase, refd, set } from "../../firebase"
 
 const RegisterScr = () => {
     const [displayName, setDisplayName] = useState("Testing")
@@ -52,14 +53,19 @@ const RegisterScr = () => {
                 })
                 // console.log(user)
                 const db = getDatabase()
-                set(ref(db, 'users/' + user.uid), {
+                set(refd(db, 'users/' + user.uid), {
                     uid: user.uid,
                     displayName: displayName,
-                    username: username,
                     email: email,
                     password: password,
                     photoURL: photoURL
                 })
+                sendEmailVerification(user)
+                    .then(() => {
+                        Alert.alert("Verification mail sent", [
+                            { text: 'OK', onPress: () => console.log('OK Pressed') },
+                        ])
+                    });
             })
             .catch((err) => {
                 console.log(err)
@@ -74,18 +80,11 @@ const RegisterScr = () => {
         <KeyboardAvoidingView style={styles.centerContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <View style={styles.inputContainer}>
                 <TextInput
-                    placeholder="Name"
+                    placeholder="Full Name"
                     value={displayName}
                     onChangeText={(text) => setDisplayName(text)}
                     style={styles.input}
                     autoCompleteType="name"
-                />
-                <TextInput
-                    placeholder="Username"
-                    value={username}
-                    onChangeText={(text) => setUsername(text)}
-                    style={styles.input}
-                    autoCompleteType="username"
                 />
                 <TextInput
                     placeholder="Email"
