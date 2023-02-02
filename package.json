@@ -21,6 +21,7 @@
     "expo-status-bar": "~1.4.2",
     "expo-system-ui": "~2.0.1",
     "firebase": "^9.14.0",
+    "moment": "^2.29.4",
     "react": "18.1.0",
     "react-native": "0.70.5",
     "react-native-actionsheet": "^2.4.2",

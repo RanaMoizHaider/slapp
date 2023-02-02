@@ -5,6 +5,7 @@ import { auth, db, refd, onValue, addToFavorites, removeFromFavorites } from "..
 import { styles, themeBackground } from "../components/Style"
 import { Ionicons } from '@expo/vector-icons'
 import { LineChart } from 'react-native-chart-kit'
+import moment from "moment"
 
 const Upward = () => {
     return (
@@ -57,10 +58,11 @@ function SingleStockScr({ route }) {
     }
 
     const setChartckData = async () => {
-        let removedFromEnd = singleStock.price.slice(0, singleStock.price.length - 10);
-        let selectedToShow = removedFromEnd.slice(-10)
+        // let removedFromEnd = singleStock.price.slice(0, singleStock.price.length - 10);
+        // let selectedToShow = removedFromEnd.slice(-10)
+        let selectedToShow = singleStock.price.slice(-15)
         setChartData({
-            labels: selectedToShow.map(entry => entry.Date),
+            labels: selectedToShow.map(entry => moment(entry.Date, 'YYYY-MM-DD').format('D')),
             datasets: [
                 {
                     data: selectedToShow.map(entry => entry.Prediction),

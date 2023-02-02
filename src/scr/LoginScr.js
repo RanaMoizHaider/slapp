@@ -47,9 +47,10 @@ const LoginScr = () => {
                 console.log("Logged In with", user.email)
             })
             .catch((err) => {
-                Alert.alert('Error', err.code, [
-                    { text: 'OK', onPress: () => console.log('OK Pressed') },
-                ])
+                // Alert.alert('Error', err.code, [
+                //     { text: 'OK', onPress: () => console.log('OK Pressed') },
+                // ])
+                console.log(err.message)
             })
     }
 

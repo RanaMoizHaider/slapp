@@ -62,9 +62,10 @@ const RegisterScr = () => {
                 })
                 sendEmailVerification(user)
                     .then(() => {
-                        Alert.alert("Verification mail sent", [
-                            { text: 'OK', onPress: () => console.log('OK Pressed') },
-                        ])
+                        // Alert.alert("Verification mail sent", [
+                        //     { text: 'OK', onPress: () => console.log('OK Pressed') },
+                        // ])
+                        console.log('Verification mail sent')
                     });
             })
             .catch((err) => {

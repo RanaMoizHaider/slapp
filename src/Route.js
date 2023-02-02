@@ -28,11 +28,11 @@ function StocksStackScreen() {
             })}
         />
         <StocksStack.Screen name="SingleStock" component={SingleStockScr} />
-        {/* <StocksStack.Group screenOptions={{ presentation: 'modal' }}>
+        <StocksStack.Group screenOptions={{ presentation: 'modal' }}>
             <StocksStack.Screen name="Login" component={LoginScr} />
             <StocksStack.Screen name="Register" component={RegisterScr} />
             <StocksStack.Screen name="ForgetPass" component={ForgetPassScr} />
-        </StocksStack.Group> */}
+        </StocksStack.Group>
     </StocksStack.Navigator>
   )
 }
