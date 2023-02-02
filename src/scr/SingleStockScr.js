@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Button, Text, View, Dimensions, StyleSheet } from 'react-native'
+import { Button, Text, View, Dimensions, StyleSheet, ScrollView } from 'react-native'
 import { useNavigation } from "@react-navigation/core"
 import { auth, db, refd, onValue, addToFavorites, removeFromFavorites } from "../../firebase"
 import { styles, themeBackground } from "../components/Style"
@@ -30,7 +30,17 @@ function SingleStockScr({ route }) {
     const [isInFavorites, setIsInFavorites] = useState(false)
     const [records, setRecords] = useState(0)
     const [chartLabels, setChartLabels] = useState([])
-    const [chartData, setChartData] = useState([])
+    const [recordAvailable, setRecordAvailable] = useState(true)
+    const [chartData, setChartData] = useState({
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        datasets: [
+            {
+                data: [5, 5, 5, 5, 5, 5],
+                strokeWidth: 2,
+            },
+        ],
+    })
+
 
     const setSingleStockData = async () => {
         onValue(refd(db, 'stocks/' + route.params.stockIndex), (snapshot) => {
@@ -45,6 +55,23 @@ function SingleStockScr({ route }) {
             })
         }
     }
+
+    const setChartckData = async () => {
+        let removedFromEnd = singleStock.price.slice(0, singleStock.price.length - 10);
+        let selectedToShow = removedFromEnd.slice(-10)
+        setChartData({
+            labels: selectedToShow.map(entry => entry.Date),
+            datasets: [
+                {
+                    data: selectedToShow.map(entry => entry.Prediction),
+                },
+            ],
+        })
+    }
+
+    useEffect(() => {
+        setChartckData()
+    }, [singleStock])
 
     useEffect(() => {
         setSingleStockData()
@@ -68,15 +95,6 @@ function SingleStockScr({ route }) {
             }
         }
     }
-    const line = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-        datasets: [
-            {
-                data: [20, 45, 28, 80, 99, 43],
-                strokeWidth: 2,
-            },
-        ],
-    };
 
     return (
         <View style={styles.ssContainer}>
@@ -85,11 +103,38 @@ function SingleStockScr({ route }) {
                 <Text style={{ fontSize: 20 }}>{singleStock?.title}</Text>
                 <View style={styles.line} />
             </View>
-            <LineChart
+            <ScrollView
+                horizontal={true}
+                // contentOffset={{ x: 10000, y: 0 }} // i needed the scrolling to start from the end not the start
+                // showsHorizontalScrollIndicator={false} // to hide scroll bar
+            >
+                <LineChart
+                    data={chartData}
+                    style={{fontSize: 1}}
+                    width={screenWidth} // from react-native
+                    height={220}
+                    yAxisLabel={'$'}
+                    chartConfig={{
+                        backgroundColor: themeBackground,
+                        backgroundGradientFrom: themeBackground,
+                        backgroundGradientTo: themeBackground,
+                        decimalPlaces: 2,
+                        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                        style: {
+                            borderRadius: 10
+                        }
+                    }}
+                    bezier
+                    style={{
+                    marginVertical: 8,
+                    borderRadius: 16
+                    }}
+                />
+                {/* <LineChart
                 data={line}
-                width={screenWidth} // from react-native
-                height={220}
-                yAxisLabel={'$'}
+                width={screenWidth}
+                height={250}
+                xLabelsOffset={10}
                 chartConfig={{
                     backgroundColor: themeBackground,
                     backgroundGradientFrom: themeBackground,
@@ -97,15 +142,20 @@ function SingleStockScr({ route }) {
                     decimalPlaces: 2,
                     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                     style: {
-                        borderRadius: 10
+                        borderRadius: 16
                     }
                 }}
-                bezier
+                withHorizontalLines={false}
+                withVerticalLines={false}
+                withHorizontalLabels={false}
+                withInnerLines={false}
+                withOuterLines={false}
                 style={{
-                marginVertical: 8,
-                borderRadius: 16
+                    paddingRight: 20, // to remove white spaces at the start of the chart
                 }}
-            />
+                bezier
+                /> */}
+            </ScrollView>
             <View style={styles.centerContainer}>
                 <Text style={{ fontSize: 20 }}>The expected price of {singleStock?.ticker} will go</Text>
                 { singleStock?.target ? <Upward /> : <Downward /> }

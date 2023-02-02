@@ -13,9 +13,10 @@ const Stocks = (props) => {
     const [isLoading, setIsLoading] = useState(true)
 
     const setStocksData = async () => {
-        onValue(refd(db, 'stocks/'), (snapshot) => {
+        onValue(refd(db, 'oldstocks/'), (snapshot) => {
             setStocks(snapshot.val())
             setFilteredStocks(snapshot.val())
+            // console.log(snapshot.val())
         })
     }
 

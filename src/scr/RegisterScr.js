@@ -20,11 +20,11 @@ import { styles } from '../components/Style'
 import { auth, getDatabase, refd, set } from "../../firebase"
 
 const RegisterScr = () => {
-    const [displayName, setDisplayName] = useState("Testing")
-    const [username, setUsername] = useState("testing")
-    const [email, setEmail] = useState("ranamoizhaider@gmail.com")
-    const [password, setPassword] = useState("123456")
-    const [photoURL, setPhotoURL] = useState("https://source.unsplash.com/random/150x150")
+    const [displayName, setDisplayName] = useState("")
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [photoURL, setPhotoURL] = useState("https://firebasestorage.googleapis.com/v0/b/allinone-69.appspot.com/o/6af6a9c4-fab5-4b62-a011-84e6c18a7787?alt=media&token=2f49b244-91db-44bc-a5fd-a0d2875f6841")
 
     const navigation = useNavigation()
 
@@ -78,7 +78,7 @@ const RegisterScr = () => {
 
     return (
         <KeyboardAvoidingView style={styles.centerContainer} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <View style={styles.inputContainer}>
+            <View style={styles.loginInputContainer}>
                 <TextInput
                     placeholder="Full Name"
                     value={displayName}
@@ -100,14 +100,6 @@ const RegisterScr = () => {
                     style={styles.input}
                     autoCompleteType="password"
                     secureTextEntry
-                />
-                <TextInput
-                    placeholder="Photo URL"
-                    value={photoURL}
-                    onChangeText={(text) => setPhotoURL(text)}
-                    style={styles.input}
-                    editable={false}
-                    caretHidden={true}
                 />
             </View>
 
