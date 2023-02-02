@@ -60,7 +60,7 @@ function SingleStockScr({ route }) {
     const setChartckData = async () => {
         // let removedFromEnd = singleStock.price.slice(0, singleStock.price.length - 10);
         // let selectedToShow = removedFromEnd.slice(-10)
-        let selectedToShow = singleStock.price.slice(-15)
+        let selectedToShow = singleStock?.price.slice(-15)
         setChartData({
             labels: selectedToShow.map(entry => moment(entry.Date, 'YYYY-MM-DD').format('D')),
             datasets: [

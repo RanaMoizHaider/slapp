@@ -11,8 +11,6 @@ const ShowFavorites = (props) => {
     const [stocks, setStocks] = useState([])
     const [favoritesNames, setFavoritesNames] = useState([])
     const [favorites, setFavorites] = useState([])
-    const [filteredFavorites, setFilteredFavorites] = useState([])
-    const [search, setSearch] = useState("")
 
     const setFavoritesNamesData = async () => {
         onValue(refd(db, `users/${currentUser.uid}/favorites`), (snapshot) => {
@@ -30,19 +28,12 @@ const ShowFavorites = (props) => {
         onValue(refd(db, 'stocks/'), (snapshot) => {
             setStocks(snapshot.val())
             setFavorites(snapshot.val().filter(stock => favoritesNames.includes(stock.ticker)))
-            setFilteredFavorites(favorites)
         })
     }
 
     useEffect(() => {
         setStocksData()
     }, [favoritesNames])
-
-    useEffect(() => {
-        setFilteredFavorites(
-            favorites.filter(item => item.title.toLowerCase().includes(search.toLowerCase()))
-        );
-    }, [search]);
 
     const Item = ({ item, onPress, backgroundColor, textColor }) => (
         <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
@@ -71,7 +62,7 @@ const ShowFavorites = (props) => {
     const renderEmpty = () => {
         return (
             <View style={styles.centerContainer}>
-                <Text>
+                <Text style={{padding: 10}}>
                     No Favorites Added
                 </Text>
             </View>
@@ -80,14 +71,6 @@ const ShowFavorites = (props) => {
 
     return (
         <View>
-            <View style={styles.searchBar}>
-                <TextInput
-                    style={styles.searchInput}
-                    placeholder="Search for stocks..."
-                    value={search}
-                    onChangeText={text => setSearch(text)}
-                />
-            </View>
             <FlatList
                 data={favorites}
                 renderItem={renderItem}
