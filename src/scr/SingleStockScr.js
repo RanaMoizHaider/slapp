@@ -125,10 +125,6 @@ function SingleStockScr({ route }) {
                         }
                     }}
                     bezier
-                    style={{
-                    marginVertical: 8,
-                    borderRadius: 16
-                    }}
                 />
                 {/* <LineChart
                 data={line}
@@ -156,10 +152,10 @@ function SingleStockScr({ route }) {
                 bezier
                 /> */}
             </ScrollView>
-            <View style={styles.centerContainer}>
+            {/* <View style={styles.centerContainer}>
                 <Text style={{ fontSize: 20 }}>The expected price of {singleStock?.ticker} will go</Text>
                 { singleStock?.target ? <Upward /> : <Downward /> }
-            </View>
+            </View> */}
             <View style={{ marginTop: 20, width: '100%', alignItems: 'center' }}>
             {currentUser ? 
                 <Button title={isInFavorites ? "Remove from favorites" : "Add to favorites"} onPress={toggleFavorite} />
